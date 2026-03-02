@@ -50,7 +50,7 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="py-32 bg-white relative overflow-hidden">
+    <section className="py-32 section-padding bg-white relative overflow-hidden">
       {/* Decorative background */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#a7c957] rounded-full blur-[150px]"></div>

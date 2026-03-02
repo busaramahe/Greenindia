@@ -23,7 +23,7 @@ const FloatingActions = () => {
 
             {/* WhatsApp Button */}
             <motion.a
-                href="https://wa.me/919493778844"
+                href="https://api.whatsapp.com/send?phone=919493778844&text=Hello%20Green%20India%20Pest%20Control!%20I%20visited%20your%20website%20and%20I%20am%20interested%20in%20your%20pest%20control%20services.%20Please%20share%20more%20information%20and%20pricing.%20Thank%20you!"
                 target="_blank"
                 rel="noopener noreferrer"
                 initial={{ scale: 0, opacity: 0 }}

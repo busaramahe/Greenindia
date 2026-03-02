@@ -20,7 +20,7 @@ const Services = () => {
   const categories = ['All', 'Residential', 'Commercial', 'Industrial'];
 
   return (
-    <section id="services" className="py-32 bg-white relative overflow-hidden">
+    <section id="services" className="py-32 section-padding bg-white relative overflow-hidden">
       {/* Background patterns */}
       <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-[#a7c957]/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
       <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-[#1a5f7a]/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2"></div>
@@ -66,7 +66,7 @@ const Services = () => {
 
         <motion.div
           layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 tablet-grid-2 gap-10"
         >
           <AnimatePresence mode="popLayout">
             {displayedItems.map((service, index) => (

@@ -16,7 +16,7 @@ const features = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="py-24 bg-gradient-to-br from-[#a7c957]/10 via-white to-[#a7c957]/5 relative overflow-hidden">
+    <section className="py-24 section-padding bg-gradient-to-br from-[#a7c957]/10 via-white to-[#a7c957]/5 relative overflow-hidden">
       {/* Artistic background pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 left-1/4 w-64 h-64 bg-[#a7c957] rounded-full blur-3xl"></div>

@@ -28,7 +28,7 @@ const steps = [
 
 const Process = () => {
   return (
-    <section id="process" className="py-24 bg-gradient-to-b from-white to-[#a7c957]/5 relative overflow-hidden">
+    <section id="process" className="py-24 section-padding bg-gradient-to-b from-white to-[#a7c957]/5 relative overflow-hidden">
       {/* Decorative background */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#a7c957] rounded-full blur-3xl"></div>

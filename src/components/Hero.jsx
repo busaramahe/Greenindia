@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, ShieldCheck, Star, MapPin, Calendar, Award, Clock, Phone, Search } from 'lucide-react';
 import Link from 'next/link';
@@ -15,12 +15,49 @@ const images = [
 const Hero = () => {
   const [currentImage, setCurrentImage] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
+  const inputRef = useRef(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % images.length);
     }, 6000);
     return () => clearInterval(timer);
+  }, []);
+
+  // Load Google Places Autocomplete restricted to India
+  useEffect(() => {
+    const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+    if (!GOOGLE_MAPS_API_KEY) return; // gracefully skip if no API key set
+
+    const initAutocomplete = () => {
+      if (!inputRef.current || !window.google?.maps?.places) return;
+      const autocomplete = new window.google.maps.places.Autocomplete(inputRef.current, {
+        componentRestrictions: { country: 'IN' },
+        fields: ['formatted_address', 'name'],
+        types: ['geocode'],
+      });
+      autocomplete.addListener('place_changed', () => {
+        const place = autocomplete.getPlace();
+        setSearchQuery(place.formatted_address || place.name || '');
+      });
+    };
+
+    if (window.google?.maps?.places) {
+      initAutocomplete();
+    } else {
+      const scriptId = 'google-maps-places-script';
+      if (!document.getElementById(scriptId)) {
+        const script = document.createElement('script');
+        script.id = scriptId;
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places`;
+        script.async = true;
+        script.defer = true;
+        script.onload = initAutocomplete;
+        document.head.appendChild(script);
+      } else {
+        document.getElementById(scriptId).addEventListener('load', initAutocomplete);
+      }
+    }
   }, []);
 
   return (
@@ -68,12 +105,12 @@ const Hero = () => {
               <span className="text-sm font-black tracking-tight uppercase">5.0★ Google Rating | 415+ Reviews</span>
             </motion.div>
 
-            <h1 className="text-5xl sm:text-7xl lg:text-[110px] font-black text-white leading-[0.85] tracking-tighter mb-10 drop-shadow-2xl">
+            <h1 className="hero-title desktop-xl-text text-5xl sm:text-7xl font-black text-white leading-[0.85] tracking-tighter mb-10 drop-shadow-2xl translate-z-0">
               Reliable <br />
               <span className="text-[#a7c957]">Pest Control</span> <br />
               <div className="mt-4 flex items-center gap-4">
-                <div className="h-1 lg:h-3 w-20 lg:w-40 bg-[#a7c957] rounded-full"></div>
-                <span className="italic font-light text-gray-300 text-2xl lg:text-4xl tracking-normal">An Eco-Friendly Life</span>
+                <div className="h-1 lg:h-3 w-20 lg:w-40 bg-[#a7c957] rounded-full shrink-0"></div>
+                <span className="italic font-light text-gray-300 text-xl md:text-2xl lg:text-4xl tracking-normal">An Eco-Friendly Life</span>
               </div>
             </h1>
 
@@ -84,6 +121,7 @@ const Hero = () => {
                 <div className="flex items-center gap-4 pl-6 flex-grow py-4 sm:py-0 w-full relative">
                   <Search size={24} className="text-[#a7c957] shrink-0" />
                   <input
+                    ref={inputRef}
                     type="text"
                     placeholder="Search Branch (e.g. Kadapa, 516001)"
                     className="w-full bg-transparent outline-none font-bold text-gray-900 text-xl lg:text-2xl placeholder:text-gray-300 tracking-tight"
@@ -98,18 +136,18 @@ const Hero = () => {
             </div>
 
             {/* Quick Stats Bar with LABELS */}
-            <div className="grid grid-cols-3 gap-10 pt-12 border-t border-white/10">
+            <div className="stats-grid grid grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10 pt-12 border-t border-white/10">
               <div className="flex flex-col">
-                <span className="text-[#a7c957] text-5xl font-black italic tracking-tighter">10+</span>
-                <span className="text-gray-400 text-xs uppercase font-black tracking-[0.2em] mt-3">Years <br /> Experience</span>
+                <span className="text-[#a7c957] text-3xl sm:text-5xl font-black italic tracking-tighter">10+</span>
+                <span className="text-gray-400 text-[10px] sm:text-xs uppercase font-black tracking-[0.2em] mt-3">Years <br /> Experience</span>
               </div>
               <div className="flex flex-col">
-                <span className="text-[#a7c957] text-5xl font-black italic tracking-tighter">400+</span>
-                <span className="text-gray-400 text-xs uppercase font-black tracking-[0.2em] mt-3">Happy <br /> Clients</span>
+                <span className="text-[#a7c957] text-3xl sm:text-5xl font-black italic tracking-tighter">400+</span>
+                <span className="text-gray-400 text-[10px] sm:text-xs uppercase font-black tracking-[0.2em] mt-3">Happy <br /> Clients</span>
               </div>
-              <div className="flex flex-col">
-                <span className="text-[#a7c957] text-5xl font-black italic tracking-tighter">20+</span>
-                <span className="text-gray-400 text-xs uppercase font-black tracking-[0.2em] mt-3">Pest <br /> Solutions</span>
+              <div className="flex flex-col col-span-2 lg:col-span-1">
+                <span className="text-[#a7c957] text-3xl sm:text-5xl font-black italic tracking-tighter">20+</span>
+                <span className="text-gray-400 text-[10px] sm:text-xs uppercase font-black tracking-[0.2em] mt-3">Pest <br /> Solutions</span>
               </div>
             </div>
           </motion.div>

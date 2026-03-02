@@ -67,13 +67,13 @@ const Navbar = () => {
               <img
                 src={logo.src}
                 alt="Green India Pest Control Logo"
-                className={`transition-all duration-500 object-contain ${isSolid ? 'h-12' : 'h-16'}`}
+                className={`transition-all duration-500 object-contain ${isSolid ? 'h-8 sm:h-12' : 'h-10 sm:h-16'}`}
               />
               <div className="flex flex-col">
-                <span className={`font-black text-lg lg:text-[22px] tracking-[0.02em] leading-none transition-colors whitespace-nowrap ${isSolid ? 'text-gray-900' : 'text-white'}`}>
+                <span className={`font-black text-sm sm:text-lg lg:text-[22px] tracking-[0.02em] leading-none transition-colors whitespace-nowrap ${isSolid ? 'text-gray-900' : 'text-white'}`}>
                   Green India
                 </span>
-                <span className="text-[10px] text-[#a7c957] font-black tracking-[0.2em] uppercase leading-none mt-1">
+                <span className="text-[8px] sm:text-[10px] text-[#a7c957] font-black tracking-[0.2em] uppercase leading-none mt-1">
                   Pest Control
                 </span>
               </div>
@@ -155,7 +155,7 @@ const Navbar = () => {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className="text-4xl font-black text-gray-900 hover:text-[#a7c957] transition-colors uppercase tracking-tighter"
+                  className="text-2xl sm:text-4xl font-black text-gray-900 hover:text-[#a7c957] transition-colors uppercase tracking-tighter"
                 >
                   {link.name}
                 </Link>

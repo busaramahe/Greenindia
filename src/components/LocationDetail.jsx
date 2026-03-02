@@ -28,7 +28,7 @@ const LocationDetail = () => {
     }
 
     return (
-        <div className="pt-44 pb-16 min-h-screen bg-white">
+        <div className="pt-28 sm:pt-44 pb-16 min-h-screen bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}
@@ -47,7 +47,7 @@ const LocationDetail = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                     >
-                        <h1 className="text-5xl md:text-6xl font-black text-gray-900 mb-8 tracking-tighter">
+                        <h1 className="text-4xl md:text-6xl font-black text-gray-900 mb-8 tracking-tighter">
                             Pest Control in <br /><span className="text-[#a7c957]">{location.name}</span>
                         </h1>
 

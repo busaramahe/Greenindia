@@ -8,7 +8,7 @@ export default function PrivacyPolicy() {
     return (
         <main className="bg-white min-h-screen">
             <Navbar />
-            <div className="pt-40 pb-20 max-w-4xl mx-auto px-6">
+            <div className="pt-28 sm:pt-40 pb-20 max-w-4xl mx-auto px-6">
                 <div className="flex items-center gap-4 mb-8">
                     <Shield className="text-[#a7c957]" size={48} />
                     <h1 className="text-4xl font-black text-gray-900 tracking-tighter">Privacy Policy</h1>

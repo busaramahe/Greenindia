@@ -79,7 +79,7 @@ const FAQ = () => {
   };
 
   return (
-    <section id="faq" className="py-32 bg-white relative overflow-hidden">
+    <section id="faq" className="py-32 section-padding bg-white relative overflow-hidden">
       {/* Schema.org markup */}
       <script
         type="application/ld+json"

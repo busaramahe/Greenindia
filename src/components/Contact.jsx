@@ -9,6 +9,7 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
+    email: '',
     service: '',
     preferredDate: '',
     message: ''
@@ -63,21 +64,38 @@ const Contact = () => {
     }
 
     setStatus('submitting');
+    setErrors({});
 
-    // Simulate API call for now (or use Google Form if configured)
     try {
-      setTimeout(() => {
+      const response = await fetch('/contact/csv', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          mobile: formData.phone,
+          email: formData.email,
+          service: formData.service,
+          message: `${formData.message} (Date: ${formData.preferredDate}, Time: ${formData.preferredTime || 'N/A'})`,
+        }),
+      });
+
+      if (response.ok) {
         setStatus('success');
-        setFormData({ name: '', phone: '', service: '', preferredDate: '', message: '' });
+        setFormData({ name: '', phone: '', email: '', service: '', preferredDate: '', message: '' });
         setTimeout(() => setStatus(''), 5000);
-      }, 1500);
+      } else {
+        setStatus('error');
+      }
     } catch (error) {
+      console.error('Submission error:', error);
       setStatus('error');
     }
   };
 
   return (
-    <section id="contact" className="py-24 bg-gradient-to-b from-white via-[#a7c957]/5 to-white relative overflow-hidden">
+    <section id="contact" className="py-24 section-padding bg-gradient-to-b from-white via-[#a7c957]/5 to-white relative overflow-hidden">
       {/* Decorative background */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-1/4 right-0 w-96 h-96 bg-[#a7c957] rounded-full blur-3xl"></div>
@@ -128,7 +146,7 @@ const Contact = () => {
 
               <div className="flex items-center gap-4 mt-4">
                 <a
-                  href="https://wa.me/919493778844"
+                  href="https://api.whatsapp.com/send?phone=919493778844&text=Hello%20Green%20India%20Pest%20Control!%20I%20visited%20your%20website%20and%20I%20am%20interested%20in%20your%20pest%20control%20services.%20Please%20share%20more%20information%20and%20pricing.%20Thank%20you!"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-grow flex items-center justify-center gap-4 bg-[#25D366] text-white py-6 rounded-[2.5rem] font-black text-xl shadow-2xl shadow-[#25D366]/30 hover:bg-[#128C7E] transition-all active:scale-95"
@@ -209,6 +227,18 @@ const Contact = () => {
                     />
                   </div>
                   {errors.phone && <p className="text-red-500 text-xs font-bold mt-2">{errors.phone}</p>}
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+                  <input
+                    type="email"
+                    id="email"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full px-5 py-4 rounded-xl bg-white border-2 border-gray-200 focus:border-[#a7c957] focus:ring-2 focus:ring-[#a7c957] text-gray-900 outline-none transition-all placeholder-gray-400"
+                    placeholder="john@example.com"
+                  />
                 </div>
               </div>
 

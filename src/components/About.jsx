@@ -13,7 +13,7 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-32 bg-white relative overflow-hidden">
+    <section id="about" className="py-32 section-padding bg-white relative overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#a7c957] rounded-full blur-[120px]"></div>
@@ -50,7 +50,7 @@ const About = () => {
             </div>
 
             {/* Floating badge */}
-            <div className="absolute -top-12 -right-12 bg-white p-12 rounded-[4rem] shadow-2xl border border-gray-100 flex flex-col items-center">
+            <div className="absolute -top-12 -right-12 mobile-hide bg-white p-12 rounded-[4rem] shadow-2xl border border-gray-100 flex flex-col items-center">
               <span className="text-[#a7c957] text-6xl font-black italic tracking-tighter">100%</span>
               <span className="text-gray-900 text-xs font-black uppercase tracking-[0.2em] text-center mt-2 leading-tight">Superior <br /> Results</span>
             </div>

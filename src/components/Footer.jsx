@@ -28,16 +28,16 @@ const Footer = () => {
             <p className="text-gray-400 font-medium leading-relaxed font-bold">
               Andhra Pradesh's most trusted pest control partner. ISO certified, eco-friendly, and 100% effective.
             </p>
-            {/* Improved Trust Badge Enhancement */}
-            <div className="bg-white p-8 rounded-[3.5rem] inline-block shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-t-4 border-[#a7c957]">
-              <div className="flex items-center gap-3 mb-3">
+            {/* Google Rating Badge — matches Hero style */}
+            <div className="inline-flex items-center gap-4 px-6 py-4 rounded-3xl bg-white/10 backdrop-blur-xl text-white shadow-2xl border border-white/20">
+              <div className="flex items-center gap-2">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" className="h-6 w-6" />
                 <div className="flex -space-x-1">
-                  {[1, 2, 3, 4, 5].map(i => <Star key={i} size={20} className="text-yellow-400 fill-yellow-400" />)}
+                  {[1, 2, 3, 4, 5].map(i => <Star key={i} size={18} className="text-yellow-400 fill-yellow-400" />)}
                 </div>
               </div>
-              <p className="text-sm text-gray-900 font-black uppercase tracking-tight">4.9 ★ Rating on Google</p>
-              <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-1">150+ Verified Client Reviews</p>
+              <div className="h-6 w-[1px] bg-white/20"></div>
+              <span className="text-sm font-black tracking-tight uppercase">5.0★ Google Rating | 415+ Reviews</span>
             </div>
           </div>
 
@@ -102,10 +102,10 @@ const Footer = () => {
         {/* Social & Copyright */}
         <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row gap-8 justify-between items-center text-sm font-black text-gray-500">
           <div className="flex gap-10">
-            <a href="#" className="hover:text-[#a7c957] transition-all transform hover:-translate-y-2"><Facebook size={32} /></a>
-            <a href="#" className="hover:text-[#a7c957] transition-all transform hover:-translate-y-2"><Instagram size={32} /></a>
-            <a href="#" className="hover:text-[#a7c957] transition-all transform hover:-translate-y-2"><Twitter size={32} /></a>
-            <a href="https://wa.me/919493778844" className="hover:text-[#25D366] transition-all transform hover:-translate-y-2">
+            <a href="https://www.facebook.com/search_results/?q=greenindiapestcontrol1" target="_blank" rel="noopener noreferrer" className="hover:text-[#a7c957] transition-all transform hover:-translate-y-2"><Facebook size={32} /></a>
+            <a href="https://www.instagram.com/greenindiapestcontrol1/" target="_blank" rel="noopener noreferrer" className="hover:text-[#a7c957] transition-all transform hover:-translate-y-2"><Instagram size={32} /></a>
+            <a href="https://x.com/GipcOffice" target="_blank" rel="noopener noreferrer" className="hover:text-[#a7c957] transition-all transform hover:-translate-y-2"><Twitter size={32} /></a>
+            <a href="https://api.whatsapp.com/send?phone=919493778844&text=Hello%20Green%20India%20Pest%20Control!%20I%20visited%20your%20website%20and%20I%20am%20interested%20in%20your%20pest%20control%20services.%20Please%20share%20more%20information%20and%20pricing.%20Thank%20you!" className="hover:text-[#25D366] transition-all transform hover:-translate-y-2">
               <svg className="h-8 w-8 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.417-.003 6.557-5.338 11.892-11.893 11.892-1.997-.001-3.951-.499-5.688-1.447L0 24zm6.59-4.859c1.72.914 3.5 1.408 5.291 1.409 5.454 0 9.894-4.44 9.896-9.895.001-2.64-1.027-5.122-2.895-6.991-1.868-1.868-4.349-2.896-6.988-2.897-5.456 0-9.897 4.44-9.899 9.896-.001 1.922.501 3.791 1.455 5.451L2.323 21.05l4.857-1.909z" /></svg>
             </a>
           </div>

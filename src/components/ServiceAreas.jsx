@@ -10,7 +10,7 @@ const ServiceAreas = () => {
   const duplicatedLocations = [...locationsData, ...locationsData];
 
   return (
-    <section className="py-24 bg-gradient-to-br from-[#a7c957]/10 via-white to-[#a7c957]/5 relative overflow-hidden">
+    <section className="py-24 section-padding bg-gradient-to-br from-[#a7c957]/10 via-white to-[#a7c957]/5 relative overflow-hidden">
       {/* Decorative background patterns */}
       <div className="absolute inset-0 opacity-5">
         <motion.div

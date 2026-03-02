@@ -50,7 +50,7 @@ const ServiceCategories = () => {
                     <div className="w-40 h-1.5 bg-[#a7c957] mx-auto rounded-full"></div>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div className="grid grid-cols-1 md:grid-cols-3 tablet-grid-2 gap-10">
                     {categories.map((cat, index) => (
                         <motion.div
                             key={cat.title}

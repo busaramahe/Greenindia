@@ -55,3 +55,49 @@
     /* Chrome, Safari, Opera */
   }
 }
+
+/* --- Responsive Design Overrides --- */
+
+/* Mobile: 320px – 480px */
+@media screen and (max-width: 480px) {
+  .hero-title {
+    font-size: 3.5rem !important;
+    line-height: 1 !important;
+  }
+  
+  .section-padding {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+  
+  .mobile-hide {
+    display: none !important;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+  }
+  
+  .card-padding {
+    padding: 1.5rem !important;
+  }
+}
+
+/* Tablet: 481px – 1024px */
+@media screen and (min-width: 481px) and (max-width: 1024px) {
+  .hero-title {
+    font-size: 5rem !important;
+  }
+  
+  .tablet-grid-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Desktop: 1025px+ */
+@media screen and (min-width: 1025px) {
+  .desktop-xl-text {
+    font-size: 110px !important;
+  }
+}
