@@ -12,6 +12,7 @@ const Contact = () => {
     email: '',
     service: '',
     preferredDate: '',
+    preferredTime: '',
     message: ''
   });
 
@@ -67,7 +68,7 @@ const Contact = () => {
     setErrors({});
 
     try {
-      const response = await fetch('/contact/csv', {
+      const response = await fetch('/api/contact/csv', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -83,7 +84,7 @@ const Contact = () => {
 
       if (response.ok) {
         setStatus('success');
-        setFormData({ name: '', phone: '', email: '', service: '', preferredDate: '', message: '' });
+        setFormData({ name: '', phone: '', email: '', service: '', preferredDate: '', preferredTime: '', message: '' });
         setTimeout(() => setStatus(''), 5000);
       } else {
         setStatus('error');

@@ -2,6 +2,10 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
+// Force Node.js runtime — required for 'fs' and 'path' to work
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
 const CSV_PATH = path.join(process.cwd(), 'data', 'contact_submissions.csv');
 const CSV_PASSWORD = 'Password456';
 
@@ -14,7 +18,14 @@ export async function GET(req) {
     }
 
     if (!fs.existsSync(CSV_PATH)) {
-        return NextResponse.json({ error: 'CSV file not found.' }, { status: 404 });
+        // Return empty CSV with headers if no submissions yet
+        const emptyCSV = 'Name,Mobile,Email,Service,Message,Submitted At\n';
+        return new Response(emptyCSV, {
+            headers: {
+                'Content-Type': 'text/csv',
+                'Content-Disposition': 'attachment; filename="contact_submissions.csv"'
+            }
+        });
     }
 
     const fileBuffer = fs.readFileSync(CSV_PATH);
@@ -43,7 +54,7 @@ export async function POST(req) {
         }
 
         if (!fs.existsSync(CSV_PATH)) {
-            const header = "Name, Mobile, Email, Service, Message, Submitted At";
+            const header = 'Name,Mobile,Email,Service,Message,Submitted At';
             fs.writeFileSync(CSV_PATH, header + row);
         } else {
             fs.appendFileSync(CSV_PATH, row);
