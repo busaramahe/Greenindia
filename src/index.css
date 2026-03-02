@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #a7c957;
+  /* Primary green color - can be easily changed */
+  --color-secondary: #b8d86a;
+  /* Lighter green for accents */
+  --color-accent: #c9e77d;
+  /* Light green for highlights */
+  --color-dark: #ffffff;
+  /* White */
+  --color-darker: #f9fafb;
+  /* Gray-50 */
+  --color-card: #ffffff;
+  /* White */
+
+  --font-sans: Inter, sans-serif;
+}
+
+/* Primary Color Class - Easy to change the entire theme color */
+.primary-color {
+  color: #a7c957;
+}
+
+.primary-bg {
+  background-color: #a7c957;
+}
+
+.primary-border {
+  border-color: #a7c957;
+}
+
+.primary-hover:hover {
+  background-color: #95b844;
+}
+
+.primary-text-hover:hover {
+  color: #a7c957;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-gray-900;
+  }
+
+  html {
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera */
+  }
+}
