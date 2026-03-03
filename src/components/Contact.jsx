@@ -177,7 +177,7 @@ const Contact = () => {
                   <Clock className="h-6 w-6 text-[#a7c957]" />
                   <div>
                     <h4 className="font-bold text-gray-900 text-xs uppercase opacity-40 mb-1">Office Hours</h4>
-                    <p className="text-gray-700 font-black text-sm">Mon - Sat: 9 AM - 8 PM <br /> Sunday: Closed</p>
+                    <p className="text-gray-700 font-black text-sm">Open 24/7 <br /> Every Day Service</p>
                   </div>
                 </div>
               </div>
