@@ -138,9 +138,15 @@ const Contact = () => {
                   <Phone className="h-7 w-7 text-white" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-900 mb-1 text-lg">Direct Line</h4>
-                  <a href="tel:9493047766" className="text-2xl text-gray-700 hover:text-[#a7c957] transition-colors font-black tracking-tight">
+                  <h4 className="font-bold text-gray-900 mb-2 text-lg">Direct Line</h4>
+                  <a href="tel:9493047766" className="block text-2xl text-gray-700 hover:text-[#a7c957] transition-colors font-black tracking-tight">
                     94930 47766
+                  </a>
+                  <a href="tel:9493027766" className="block text-xl text-gray-600 hover:text-[#a7c957] transition-colors font-bold tracking-tight mt-1">
+                    94930 27766
+                  </a>
+                  <a href="tel:9493778844" className="block text-xl text-gray-600 hover:text-[#a7c957] transition-colors font-bold tracking-tight mt-1">
+                    94937 78844
                   </a>
                 </div>
               </div>

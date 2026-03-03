@@ -1,16 +1,13 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ArrowRight, ShieldCheck, Star, MapPin, Calendar, Award, Clock, Phone, Search } from 'lucide-react';
 import Link from 'next/link';
 
-import logo from '../assets/Logo.jpg';
+import slide1 from '../assets/HeroSlide1.jpg';
+import slide2 from '../assets/HeroSlide2.jpg';
 
-const images = [
-  'https://images.unsplash.com/photos/PHlJY8vviUA/download?auto=format&fit=crop&q=80&w=1200',
-  'https://images.unsplash.com/photos/2iNv2jXonQw/download?auto=format&fit=crop&q=80&w=1200',
-  'https://images.unsplash.com/photos/FnvNDJwi1H8/download?auto=format&fit=crop&q=80&w=1200'
-];
+const images = [slide1.src, slide2.src];
 
 const Hero = () => {
   const [currentImage, setCurrentImage] = useState(0);
@@ -20,7 +17,7 @@ const Hero = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % images.length);
-    }, 6000);
+    }, 4000);
     return () => clearInterval(timer);
   }, []);
 
@@ -62,18 +59,21 @@ const Hero = () => {
 
   return (
     <section className="relative w-full min-h-screen bg-gray-900 overflow-hidden flex items-center pt-20">
-      {/* Background with Dark Overlay */}
-      <AnimatePresence mode="wait">
+      {/* Background Slideshow - Smooth Crossfade */}
+      {images.map((src, index) => (
         <motion.div
-          key={currentImage}
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 0.7, scale: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.5 }}
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url('${images[currentImage]}')` }}
+          key={index}
+          animate={{ opacity: index === currentImage ? 0.65 : 0 }}
+          transition={{ duration: 1.2, ease: 'easeInOut' }}
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url('${src}')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}
         />
-      </AnimatePresence>
+      ))}
 
       {/* Semi-transparent dark overlay (0.55) as requested */}
       <div className="absolute inset-0 bg-black/55 backdrop-blur-[2px]"></div>
@@ -171,7 +171,6 @@ const Hero = () => {
                 {[
                   { icon: ShieldCheck, text: 'Safe and Eco-Smart', color: '#a7c957' },
                   { icon: Clock, text: '24/7 Rapid Support', color: '#3b82f6' },
-                  { icon: Award, text: 'Government Licensed', color: '#f59e0b' }
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-5 p-5 bg-gray-50 rounded-3xl border border-gray-100 hover:bg-white transition-all">
                     <div className="p-3 rounded-xl text-white shadow-lg" style={{ backgroundColor: item.color }}>

@@ -151,10 +151,6 @@ const Services = () => {
             <Star size={24} className="text-yellow-500 fill-yellow-500" />
             <span className="font-bold text-gray-900">Google Verified</span>
           </div>
-          <div className="flex items-center gap-3">
-            <ShieldCheck size={24} className="text-[#a7c957]" />
-            <span className="font-bold text-gray-900">Government Licensed</span>
-          </div>
         </div>
       </div>
     </section>

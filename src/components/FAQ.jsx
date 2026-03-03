@@ -22,7 +22,7 @@ const faqs = [
   {
     category: 'Pricing',
     question: 'Is there a warranty for your services?',
-    answer: 'Yes, we offer warranties ranging from 3 months to 1 year depending on the service type (e.g., termite control has a longer warranty).',
+    answer: 'Yes, we offer warranties ranging from 3 months to 1 year depending on the service type (e.g., Cockroach control has a longer warranty).',
   },
   {
     category: 'Safety',

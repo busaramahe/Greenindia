@@ -4,7 +4,7 @@ import { Menu, X, MapPin, Phone, Star } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import logo from '../assets/Logo.jpg';
+import logo from '../assets/Logo_transparent.png';
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -60,34 +60,34 @@ const Navbar = () => {
           </div>
         )}
 
-        <div className="flex justify-between items-center h-20 gap-10 lg:gap-20">
-          <div className="flex items-center flex-shrink-0 mr-8 xl:mr-12">
+        <div className="flex justify-between items-center h-20 gap-4 lg:gap-8">
+          <div className="flex items-center flex-shrink-0">
             {/* Logo Area (Fixed truncation) */}
-            <Link href="/" className="flex-shrink-0 flex items-center gap-3 group">
+            <Link href="/" className="flex-shrink-0 flex items-center gap-0 sm:gap-1 group">
               <img
                 src={logo.src}
                 alt="Green India Pest Control Logo"
-                className={`transition-all duration-500 object-contain ${isSolid ? 'h-8 sm:h-12' : 'h-10 sm:h-16'}`}
+                className={`transition-all duration-500 object-contain -mr-2 sm:-mr-4 ${isSolid ? 'h-12 sm:h-16 lg:h-20' : 'h-14 sm:h-20 lg:h-24'}`}
               />
-              <div className="flex flex-col">
-                <span className={`font-black text-sm sm:text-lg lg:text-[22px] tracking-[0.02em] leading-none transition-colors whitespace-nowrap ${isSolid ? 'text-gray-900' : 'text-white'}`}>
+              <div className="flex flex-col relative z-10">
+                <span className={`font-[900] text-[20px] sm:text-[26px] lg:text-[32px] tracking-tighter leading-[0.8] mb-0.5 transition-colors whitespace-nowrap ${isSolid ? 'text-gray-900' : 'text-white'}`}>
                   Green India
                 </span>
-                <span className="text-[8px] sm:text-[10px] text-[#a7c957] font-black tracking-[0.2em] uppercase leading-none mt-1">
+                <span className="text-[10px] sm:text-[11px] lg:text-[13px] text-[#a7c957] font-[900] tracking-[0.2em] uppercase leading-none">
                   Pest Control
                 </span>
               </div>
             </Link>
           </div>
 
-          {/* Navigation Links (Bug 3: Spacing and centering) */}
-          <div className="hidden lg:flex items-center gap-10">
-            <div className="flex items-center space-x-6 xl:space-x-8">
+          {/* Navigation Links (Fluid responsive sizing) */}
+          <div className="hidden lg:flex items-center gap-4 xl:gap-8">
+            <div className="flex items-center space-x-4 xl:space-x-8">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`font-black text-[14px] xl:text-[15px] uppercase tracking-[0.1em] transition-all duration-300 relative group py-2 ${isSolid ? 'text-gray-900' : 'text-white'
+                  className={`font-black text-[12px] xl:text-[14px] uppercase tracking-[0.1em] transition-all duration-300 relative group py-2 ${isSolid ? 'text-gray-900' : 'text-white'
                     }`}
                 >
                   {link.name}
@@ -97,10 +97,10 @@ const Navbar = () => {
             </div>
 
             {/* Desktop CTA */}
-            <div className="flex items-center gap-6 ml-4">
+            <div className="flex items-center gap-3 xl:gap-6 ml-2 xl:ml-4">
               <a
                 href="tel:9493047766"
-                className={`hidden xl:flex items-center gap-2 font-black text-sm uppercase tracking-tighter transition-all ${isSolid ? 'text-gray-900' : 'text-white'
+                className={`hidden xl:flex items-center gap-2 font-black text-xs xl:text-sm uppercase tracking-tighter transition-all ${isSolid ? 'text-gray-900' : 'text-white'
                   }`}
               >
                 <Phone size={16} className="text-[#a7c957]" fill="currentColor" />
@@ -108,7 +108,7 @@ const Navbar = () => {
               </a>
               <Link
                 href="/#contact"
-                className="flex items-center gap-2 px-6 py-3.5 rounded-2xl font-black text-sm uppercase tracking-widest transition-all bg-[#a7c957] text-white hover:bg-[#8fb344] shadow-xl shadow-[#a7c957]/30 active:scale-95 whitespace-nowrap"
+                className="flex items-center gap-2 px-4 py-2.5 xl:px-6 xl:py-3.5 rounded-2xl font-black text-xs xl:text-sm uppercase tracking-widest transition-all bg-[#a7c957] text-white hover:bg-[#8fb344] shadow-xl shadow-[#a7c957]/30 active:scale-95 whitespace-nowrap"
               >
                 Book Now
               </Link>

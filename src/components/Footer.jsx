@@ -109,7 +109,12 @@ const Footer = () => {
               <svg className="h-8 w-8 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.417-.003 6.557-5.338 11.892-11.893 11.892-1.997-.001-3.951-.499-5.688-1.447L0 24zm6.59-4.859c1.72.914 3.5 1.408 5.291 1.409 5.454 0 9.894-4.44 9.896-9.895.001-2.64-1.027-5.122-2.895-6.991-1.868-1.868-4.349-2.896-6.988-2.897-5.456 0-9.897 4.44-9.899 9.896-.001 1.922.501 3.791 1.455 5.451L2.323 21.05l4.857-1.909z" /></svg>
             </a>
           </div>
-          <p className="text-center md:text-right">&copy; 2026 Green India Pest Control. <br className="md:hidden" /> All Rights Reserved.</p>
+          <div className="text-center md:text-right">
+            <p>&copy; 2026 Green India Pest Control. <br className="md:hidden" /> All Rights Reserved.</p>
+            <p className="mt-1">
+              Designed by <a href="https://www.mstechhive.com" target="_blank" rel="noopener noreferrer" className="text-[#a7c957] hover:underline">MS TECH HIVE</a>
+            </p>
+          </div>
         </div>
       </div>
     </footer>
