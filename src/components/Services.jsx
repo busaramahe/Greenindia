@@ -26,26 +26,26 @@ const Services = () => {
       <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-[#1a5f7a]/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-        <div className="flex flex-col lg:flex-row justify-between items-end mb-20 gap-8">
+        <div className="flex flex-col lg:flex-row justify-between items-center lg:items-end mb-16 sm:mb-20 gap-8 text-center lg:text-left">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="max-w-2xl"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#a7c957]/10 text-[#7a9a3f] text-sm font-bold mb-4">
-              <ShieldCheck size={16} />
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#a7c957]/10 text-[#7a9a3f] text-[10px] sm:text-xs font-bold mb-4">
+              <ShieldCheck size={14} className="sm:size-16" />
               <span>Expert Solutions</span>
             </div>
-            <h2 className="text-5xl md:text-6xl font-black text-gray-900 mb-6 tracking-tighter">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 mb-6 tracking-tighter leading-tight">
               World-Class <span className="text-[#a7c957]">Pest Control</span> Services
             </h2>
-            <p className="text-xl text-gray-600 font-medium">
+            <p className="text-lg sm:text-xl text-gray-600 font-medium max-w-xl mx-auto lg:mx-0">
               Tailored treatments for every pest, every sector, and every budget. 100% safe for families and workplaces.
             </p>
           </motion.div>
 
-          <div className="flex flex-wrap gap-4 mt-8 lg:mt-0">
+          <div className="flex flex-wrap justify-center lg:justify-end gap-3 sm:gap-4 mt-4 lg:mt-0">
             {categories.map(cat => (
               <button
                 key={cat}
@@ -53,7 +53,7 @@ const Services = () => {
                   setFilter(cat);
                   setCurrentPage(1);
                 }}
-                className={`px-8 py-3.5 rounded-full font-black text-xs uppercase tracking-[0.2em] transition-all border-2 ${filter === cat
+                className={`px-5 sm:px-8 py-2.5 sm:py-3.5 rounded-full font-black text-[10px] sm:text-xs uppercase tracking-[0.1em] sm:tracking-[0.2em] transition-all border-2 ${filter === cat
                   ? 'bg-[#a7c957] text-white border-[#a7c957] shadow-[0_15px_30px_rgba(167,201,87,0.3)]'
                   : 'bg-white text-gray-400 border-gray-100 hover:border-gray-200'
                   }`}

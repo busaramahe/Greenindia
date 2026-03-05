@@ -67,13 +67,13 @@ const Navbar = () => {
               <img
                 src={logo.src}
                 alt="Green India Pest Control Logo"
-                className={`transition-all duration-500 object-contain -mr-2 sm:-mr-4 ${isSolid ? 'h-12 sm:h-16 lg:h-20' : 'h-14 sm:h-20 lg:h-24'}`}
+                className={`transition-all duration-500 object-contain -mr-1.5 sm:-mr-4 ${isSolid ? 'h-10 sm:h-16 lg:h-20' : 'h-12 sm:h-20 lg:h-24'}`}
               />
               <div className="flex flex-col relative z-10">
-                <span className={`font-[900] text-[20px] sm:text-[26px] lg:text-[32px] tracking-tighter leading-[0.8] mb-0.5 transition-colors whitespace-nowrap ${isSolid ? 'text-gray-900' : 'text-white'}`}>
+                <span className={`font-[900] text-[18px] sm:text-[26px] lg:text-[32px] tracking-tighter leading-[0.8] mb-0.5 transition-colors whitespace-nowrap ${isSolid ? 'text-gray-900' : 'text-white'}`}>
                   Green India
                 </span>
-                <span className="text-[10px] sm:text-[11px] lg:text-[13px] text-[#a7c957] font-[900] tracking-[0.2em] uppercase leading-none">
+                <span className="text-[9px] sm:text-[11px] lg:text-[13px] text-[#a7c957] font-[900] tracking-[0.2em] uppercase leading-none">
                   Pest Control
                 </span>
               </div>

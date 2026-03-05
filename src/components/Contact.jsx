@@ -1,11 +1,12 @@
 "use client";
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Phone, Mail, MapPin, Clock, Send, CheckCircle } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Phone, Mail, MapPin, Clock, Send, CheckCircle, Map } from 'lucide-react';
 
 const Contact = () => {
   const [status, setStatus] = useState(''); // '', 'submitting', 'success', 'error'
   const [errors, setErrors] = useState({});
+  const [serviceLocation, setServiceLocation] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -15,6 +16,22 @@ const Contact = () => {
     preferredTime: '',
     message: ''
   });
+
+  useEffect(() => {
+    const savedLocation = typeof window !== 'undefined' ? sessionStorage.getItem('lastServiceLocation') : null;
+    if (savedLocation) {
+      setServiceLocation(savedLocation);
+      setFormData(prev => ({ ...prev, message: `Pest control inquiry for my property in ${savedLocation}. Please contact me.` }));
+    }
+
+    const handleLocationUpdate = (e) => {
+      setServiceLocation(e.detail);
+      setFormData(prev => ({ ...prev, message: `Pest control inquiry for my property in ${e.detail}. Please contact me.` }));
+    };
+
+    window.addEventListener('serviceLocationSearch', handleLocationUpdate);
+    return () => window.removeEventListener('serviceLocationSearch', handleLocationUpdate);
+  }, []);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -118,6 +135,24 @@ const Contact = () => {
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Ready to live pest-free? Contact us today for a free consultation and quote.
           </p>
+
+          <AnimatePresence>
+            {serviceLocation && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                className="mt-8 p-4 bg-[#a7c957]/10 border border-[#a7c957]/30 rounded-2xl flex items-center justify-center gap-3 backdrop-blur-sm mx-auto max-w-2xl"
+              >
+                <div className="bg-[#a7c957] p-1.5 rounded-full">
+                  <CheckCircle className="text-white" size={16} />
+                </div>
+                <p className="text-[#5d7729] font-bold text-sm md:text-base">
+                  Confirmed: We are happy to service your location <span className="text-[#a7c957] font-black underline bg-[#a7c957]/5 px-2 rounded-md tracking-tight">"{serviceLocation}"</span>
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">

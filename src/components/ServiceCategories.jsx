@@ -42,15 +42,15 @@ const ServiceCategories = () => {
                     initial={{ opacity: 0, y: -20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-center mb-20"
+                    className="text-center mb-12 sm:mb-20"
                 >
-                    <h2 className="text-5xl md:text-6xl font-black text-gray-900 mb-6 tracking-tighter">
+                    <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 mb-6 tracking-tighter leading-tight">
                         Pest Control for <span className="text-[#a7c957]">Every Sector</span>
                     </h2>
-                    <div className="w-40 h-1.5 bg-[#a7c957] mx-auto rounded-full"></div>
+                    <div className="w-32 sm:w-40 h-1.5 bg-[#a7c957] mx-auto rounded-full"></div>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 tablet-grid-2 gap-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
                     {categories.map((cat, index) => (
                         <motion.div
                             key={cat.title}
@@ -58,7 +58,7 @@ const ServiceCategories = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.2, duration: 0.6 }}
-                            className="group relative bg-white rounded-[3.5rem] overflow-hidden shadow-2xl border border-gray-100 flex flex-col h-[550px] transition-all duration-500 hover:shadow-[0_40px_80px_rgba(0,0,0,0.12)]"
+                            className="group relative bg-white rounded-[2.5rem] sm:rounded-[3.5rem] overflow-hidden shadow-2xl border border-gray-100 flex flex-col h-[500px] sm:h-[550px] transition-all duration-500 hover:shadow-[0_40px_80px_rgba(0,0,0,0.12)]"
                         >
                             <div className="relative h-72 overflow-hidden">
                                 <img

@@ -1,195 +1,267 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight, ShieldCheck, Star, MapPin, Calendar, Award, Clock, Phone, Search } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, ShieldCheck, Star, MapPin, Calendar, Award, Clock, Phone, Search, Leaf, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 
-import slide1 from '../assets/HeroSlide1.jpg';
-import slide2 from '../assets/HeroSlide2.jpg';
+import slide1 from '../assets/HeroPremium1.png';
+import slide2 from '../assets/HeroPremium5.png'; // New: Professional Spraying
+import slide3 from '../assets/HeroPremium4.png';
+import slide4 from '../assets/HeroPremium6.png'; // New: Botanical Mist
+import slide5 from '../assets/HeroPremium3.png';
 
-const images = [slide1.src, slide2.src];
+const slides = [
+  {
+    image: slide1.src,
+    title: "We Are Expert In",
+    highlight: "Pest Services",
+    subtitle: "Uncompromising Protection.",
+    slogan: "Premier Eco-Smart Solutions"
+  },
+  {
+    image: slide2.src,
+    title: "Professional",
+    highlight: "Precision Spraying",
+    subtitle: "Targeted Perimeter Defense.",
+    slogan: "Advanced Application Technology"
+  },
+  {
+    image: slide4.src,
+    title: "Safe Botanical",
+    highlight: "In-Shield Mist",
+    subtitle: "Non-Toxic & Family Safe.",
+    slogan: "Bio-Organic Protection"
+  },
+  {
+    image: slide3.src,
+    title: "Secure Your",
+    highlight: "Luxury Dwelling",
+    subtitle: "Quietly Effective.",
+    slogan: "Elite Residential Shielding"
+  },
+  {
+    image: slide5.src,
+    title: "Green Tech",
+    highlight: "Innovation",
+    subtitle: "Science-Backed Results.",
+    slogan: "Proven Professional Excellence"
+  }
+];
 
 const Hero = () => {
   const [currentImage, setCurrentImage] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
-  const inputRef = useRef(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % images.length);
-    }, 4000);
+      setCurrentImage((prev) => (prev + 1) % slides.length);
+    }, 6500);
     return () => clearInterval(timer);
   }, []);
 
-  // Load Google Places Autocomplete restricted to India
-  useEffect(() => {
-    const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-    if (!GOOGLE_MAPS_API_KEY) return; // gracefully skip if no API key set
-
-    const initAutocomplete = () => {
-      if (!inputRef.current || !window.google?.maps?.places) return;
-      const autocomplete = new window.google.maps.places.Autocomplete(inputRef.current, {
-        componentRestrictions: { country: 'IN' },
-        fields: ['formatted_address', 'name'],
-        types: ['geocode'],
-      });
-      autocomplete.addListener('place_changed', () => {
-        const place = autocomplete.getPlace();
-        setSearchQuery(place.formatted_address || place.name || '');
-      });
-    };
-
-    if (window.google?.maps?.places) {
-      initAutocomplete();
-    } else {
-      const scriptId = 'google-maps-places-script';
-      if (!document.getElementById(scriptId)) {
-        const script = document.createElement('script');
-        script.id = scriptId;
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places`;
-        script.async = true;
-        script.defer = true;
-        script.onload = initAutocomplete;
-        document.head.appendChild(script);
-      } else {
-        document.getElementById(scriptId).addEventListener('load', initAutocomplete);
-      }
+  const handleCheckRange = () => {
+    if (searchQuery.trim()) {
+      // Dispatch a custom event and update session storage for the contact section to pick up
+      window.dispatchEvent(new CustomEvent('serviceLocationSearch', { detail: searchQuery }));
+      sessionStorage.setItem('lastServiceLocation', searchQuery);
+      window.location.hash = 'contact';
     }
-  }, []);
+  };
 
   return (
-    <section className="relative w-full min-h-screen bg-gray-900 overflow-hidden flex items-center pt-20">
-      {/* Background Slideshow - Smooth Crossfade */}
-      {images.map((src, index) => (
+    <section className="relative w-full min-h-[95vh] lg:min-h-screen bg-[#0a0f0d] overflow-hidden flex items-center pt-20">
+      {/* Background Image Layers */}
+      <AnimatePresence mode="wait">
         <motion.div
-          key={index}
-          animate={{ opacity: index === currentImage ? 0.65 : 0 }}
-          transition={{ duration: 1.2, ease: 'easeInOut' }}
-          className="absolute inset-0"
+          key={currentImage}
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          className="absolute inset-0 z-0"
           style={{
-            backgroundImage: `url('${src}')`,
+            backgroundImage: `url('${slides[currentImage].image}')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
           }}
         />
-      ))}
+      </AnimatePresence>
 
-      {/* Semi-transparent dark overlay (0.55) as requested */}
-      <div className="absolute inset-0 bg-black/55 backdrop-blur-[2px]"></div>
-      <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-80"></div>
+      {/* Overlays for depth */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#0a0f0d] via-[#0a0f0d]/40 to-transparent z-2"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f0d] via-transparent to-transparent z-2"></div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 w-full relative z-10 py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 items-center">
-          {/* Left Column: Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1 }}
-            className="lg:col-span-3"
-          >
-            {/* Google Rating Badge */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 w-full relative z-10 py-12 lg:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center text-center lg:text-left">
+
+          {/* Left Side: Text Content */}
+          <div className="lg:col-span-7 space-y-6 sm:space-y-8 relative z-20">
+            {/* Rating Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="inline-flex items-center gap-4 px-6 py-4 rounded-3xl bg-white/10 backdrop-blur-xl text-white shadow-2xl mb-10 border border-white/20"
+              className="inline-flex items-center gap-2 sm:gap-3 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10"
             >
-              <div className="flex items-center gap-2">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" className="h-6 w-6" />
-                <div className="flex -space-x-1">
-                  {[1, 2, 3, 4, 5].map(i => <Star key={i} size={18} className="text-yellow-400 fill-yellow-400" />)}
-                </div>
+              <div className="flex -space-x-1">
+                {[1, 2, 3, 4, 5].map(i => <Star key={i} size={12} className="text-yellow-400 fill-yellow-400 sm:size-14" />)}
               </div>
-              <div className="h-6 w-[1px] bg-white/20"></div>
-              <span className="text-sm font-black tracking-tight uppercase">5.0★ Google Rating | 415+ Reviews</span>
+              <span className="text-[9px] sm:text-[10px] md:text-xs font-bold text-white/90 tracking-widest uppercase">
+                415+ Certified Reviews on Google
+              </span>
             </motion.div>
 
-            <h1 className="hero-title desktop-xl-text text-5xl sm:text-7xl font-black text-white leading-[0.85] tracking-tighter mb-10 drop-shadow-2xl translate-z-0">
-              Reliable <br />
-              <span className="text-[#a7c957]">Pest Control</span> <br />
-              <div className="mt-4 flex items-center gap-4">
-                <div className="h-1 lg:h-3 w-20 lg:w-40 bg-[#a7c957] rounded-full shrink-0"></div>
-                <span className="italic font-light text-gray-300 text-xl md:text-2xl lg:text-4xl tracking-normal">An Eco-Friendly Life</span>
-              </div>
-            </h1>
+            {/* Heading */}
+            <div className="space-y-4 max-w-[750px] overflow-hidden mx-auto lg:mx-0">
+              <motion.div
+                key={`slogan-${currentImage}`}
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 }}
+                className="flex items-center justify-center lg:justify-start gap-2 text-[#a7c957] font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase text-[10px] sm:text-xs md:text-sm"
+              >
+                <Sparkles size={14} className="sm:size-16" />
+                <span>{slides[currentImage].slogan}</span>
+              </motion.div>
 
-            {/* Find Your Location - CITY/PINCODE SEARCH BAR */}
-            <div className="relative max-w-2xl mb-14 mt-16 group">
-              <div className="absolute -inset-2 bg-[#a7c957]/30 rounded-[2.5rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              <div className="relative flex flex-col sm:flex-row items-center bg-white rounded-[2.5rem] p-3 shadow-2xl border border-white/20 overflow-hidden">
-                <div className="flex items-center gap-4 pl-6 flex-grow py-4 sm:py-0 w-full relative">
-                  <Search size={24} className="text-[#a7c957] shrink-0" />
+              <motion.h1
+                key={`title-${currentImage}`}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "circOut" }}
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[75px] font-black text-white leading-[0.9] tracking-tight"
+              >
+                {slides[currentImage].title} <br />
+                <span className="text-[#a7c957] shadow-xl">{slides[currentImage].highlight}</span> <br />
+                <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-white/40 font-medium block mt-2">
+                  {slides[currentImage].subtitle}
+                </span>
+              </motion.h1>
+            </div>
+
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="max-w-xl mx-auto lg:mx-0 text-base sm:text-lg text-white/70 font-medium leading-relaxed"
+            >
+              Advanced pest management meets environmental responsibility. We don't just eliminate pests; we fortify your home using eco-safe botanical technology.
+            </motion.p>
+
+            {/* Search Bar Refined */}
+            <div className="relative max-w-xl group mx-auto lg:mx-0">
+              <div className="absolute -inset-1 bg-[#a7c957]/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition duration-500"></div>
+              <div className="relative flex flex-col sm:flex-row items-stretch sm:items-center bg-[#0a0f0d]/80 backdrop-blur-2xl rounded-2xl p-2 border border-white/10 gap-2 sm:gap-0">
+                <div className="flex items-center flex-grow px-2 sm:px-0">
+                  <MapPin className="ml-2 sm:ml-4 text-[#a7c957]" size={20} />
                   <input
-                    ref={inputRef}
                     type="text"
-                    placeholder="Search Branch (e.g. Kadapa, 516001)"
-                    className="w-full bg-transparent outline-none font-bold text-gray-900 text-xl lg:text-2xl placeholder:text-gray-300 tracking-tight"
+                    placeholder="Enter area pin code (e.g. 516001)"
+                    className="flex-grow bg-transparent border-none outline-none px-4 py-3 text-white placeholder:text-white/30 font-medium text-sm sm:text-base"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleCheckRange()}
                   />
                 </div>
-                <button className="w-full sm:w-auto bg-[#a7c957] hover:bg-gray-900 text-white px-10 py-6 rounded-[2rem] font-black text-lg uppercase tracking-widest transition-all active:scale-95 shadow-xl">
-                  Check Branch
+                <button
+                  onClick={handleCheckRange}
+                  className="bg-[#a7c957] hover:bg-[#95b844] text-[#0a0f0d] font-bold px-6 py-4 sm:py-3 rounded-xl transition-all flex items-center justify-center gap-2"
+                >
+                  <span className="whitespace-nowrap">Check Range</span>
+                  <ArrowRight size={18} />
                 </button>
               </div>
             </div>
 
-            {/* Quick Stats Bar with LABELS */}
-            <div className="stats-grid grid grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10 pt-12 border-t border-white/10">
-              <div className="flex flex-col">
-                <span className="text-[#a7c957] text-3xl sm:text-5xl font-black italic tracking-tighter">10+</span>
-                <span className="text-gray-400 text-[10px] sm:text-xs uppercase font-black tracking-[0.2em] mt-3">Years <br /> Experience</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-[#a7c957] text-3xl sm:text-5xl font-black italic tracking-tighter">400+</span>
-                <span className="text-gray-400 text-[10px] sm:text-xs uppercase font-black tracking-[0.2em] mt-3">Happy <br /> Clients</span>
-              </div>
-              <div className="flex flex-col col-span-2 lg:col-span-1">
-                <span className="text-[#a7c957] text-3xl sm:text-5xl font-black italic tracking-tighter">20+</span>
-                <span className="text-gray-400 text-[10px] sm:text-xs uppercase font-black tracking-[0.2em] mt-3">Pest <br /> Solutions</span>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Right Column: Hero Card */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="lg:col-span-2 relative mt-12 lg:mt-0"
-          >
-            <div className="bg-white p-12 rounded-[4rem] shadow-[0_60px_120px_rgba(0,0,0,0.5)] border border-white/10 relative group">
-              <div className="absolute -top-12 -right-12 bg-[#1a5f7a] text-white p-10 rounded-[3.5rem] shadow-2xl flex flex-col items-center">
-                <Award size={48} className="mb-4 text-[#a7c957]" />
-                <p className="text-xs font-black uppercase tracking-[0.2em] leading-tight text-center">Certified <br /> Protection</p>
-              </div>
-
-              <h3 className="text-4xl font-black text-gray-900 mb-8 tracking-tighter uppercase italic leading-none">Book Free <br /> <span className="text-[#a7c957]">Inspection</span></h3>
-
-              <div className="space-y-4">
-                {[
-                  { icon: ShieldCheck, text: 'Safe and Eco-Smart', color: '#a7c957' },
-                  { icon: Clock, text: '24/7 Rapid Support', color: '#3b82f6' },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-5 p-5 bg-gray-50 rounded-3xl border border-gray-100 hover:bg-white transition-all">
-                    <div className="p-3 rounded-xl text-white shadow-lg" style={{ backgroundColor: item.color }}>
-                      <item.icon size={24} />
-                    </div>
-                    <span className="text-lg font-black text-gray-700 tracking-tight">{item.text}</span>
-                  </div>
-                ))}
-              </div>
-
-              <Link href="/#contact" className="mt-12 block w-full bg-gray-900 hover:bg-[#a7c957] text-white text-center py-7 rounded-[2rem] font-black text-xl shadow-2xl transition-all transform hover:scale-[1.02] active:scale-95 uppercase tracking-widest">
-                Get Free Quote
+            {/* Mobile CTA (Hidden on desktop) */}
+            <div className="lg:hidden pt-4">
+              <Link
+                href="/#contact"
+                className="inline-flex items-center gap-3 bg-white text-[#0a0f0d] px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-widest shadow-2xl active:scale-95"
+              >
+                Book Diagnostic <Calendar size={20} className="text-[#a7c957]" />
               </Link>
             </div>
-          </motion.div>
+
+            {/* Feature Tags */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="flex flex-wrap justify-center lg:justify-start gap-4 sm:gap-6 pt-4"
+            >
+              <div className="flex items-center gap-2 text-white/60 text-[10px] sm:text-xs font-semibold uppercase tracking-wider backdrop-blur-sm bg-white/5 px-4 py-2 rounded-full border border-white/10">
+                <ShieldCheck size={14} className="text-[#a7c957]" />
+                <span>WHO Certified</span>
+              </div>
+              <div className="flex items-center gap-2 text-white/60 text-[10px] sm:text-xs font-semibold uppercase tracking-wider backdrop-blur-sm bg-white/5 px-4 py-2 rounded-full border border-white/10">
+                <Leaf size={14} className="text-[#a7c957]" />
+                <span>Botanical Sprays</span>
+              </div>
+              <div className="flex items-center gap-2 text-white/60 text-[10px] sm:text-xs font-semibold uppercase tracking-wider backdrop-blur-sm bg-white/5 px-4 py-2 rounded-full border border-white/10">
+                <Clock size={14} className="text-[#a7c957]" />
+                <span>24/7 Response</span>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Right Side: CTA Card (Desktop only) */}
+          <div className="lg:col-span-5 hidden lg:block">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, rotateY: 20 }}
+              animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+              transition={{ duration: 1, delay: 0.4 }}
+              className="relative"
+            >
+              <div className="absolute -inset-0.5 bg-gradient-to-br from-[#a7c957] to-[#1a5f7a] rounded-[3rem] blur opacity-30"></div>
+              <div className="relative bg-[#0a0f0d]/90 backdrop-blur-3xl border border-white/10 rounded-[3rem] p-10 overflow-hidden group">
+                {/* Decorative elements inside card */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#a7c957]/10 blur-3xl rounded-full -mr-16 -mt-16"></div>
+
+                <div className="relative z-10 space-y-8 text-center pt-4">
+                  <div className="inline-flex p-4 rounded-3xl bg-[#a7c957]/10 text-[#a7c957] mb-2">
+                    <Calendar size={32} />
+                  </div>
+                  <div>
+                    <h3 className="text-3xl font-black text-white italic tracking-tighter uppercase mb-2">Schedule Free</h3>
+                    <p className="text-[#a7c957] text-4xl font-extrabold tracking-tight uppercase leading-none">Diagnostic</p>
+                  </div>
+
+                  <p className="text-white/50 font-medium">Get a comprehensive pest assessment of your property within 24 hours.</p>
+
+                  <div className="pt-4 space-y-3">
+                    <Link href="/#contact" className="block w-full py-5 px-8 bg-[#a7c957] hover:bg-white text-[#0a0f0d] rounded-2xl font-black transition-all group-hover:shadow-[0_0_30px_rgba(167,201,87,0.3)]">
+                      SECURE YOUR SLOT
+                    </Link>
+                    <div className="flex items-center justify-center gap-2 text-white/40 text-xs font-bold tracking-widest uppercase">
+                      <ShieldCheck size={14} />
+                      <span>No Obligation Required</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
         </div>
       </div>
+
+      {/* Bottom Accent */}
+      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 1 }}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10 hidden lg:flex flex-col items-center gap-2"
+      >
+        <span className="text-[10px] font-bold text-white/30 uppercase tracking-[0.3em]">Discover</span>
+        <div className="w-px h-12 bg-gradient-to-b from-[#a7c957] to-transparent"></div>
+      </motion.div>
     </section>
   );
 };
 
 export default Hero;
+

@@ -14,30 +14,30 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
           {/* Brand & Trust */}
           <div className="space-y-8">
-            <Link href="/" className="flex items-center gap-4 group">
-              <img src={logo.src} alt="Green India Pest Control Logo" className="h-16 w-auto object-contain" />
+            <Link href="/" className="flex items-center gap-3 sm:gap-4 group">
+              <img src={logo.src} alt="Green India Pest Control Logo" className="h-12 sm:h-16 w-auto object-contain" />
               <div className="flex flex-col">
-                <span className="text-2xl font-black tracking-tighter text-white">
+                <span className="text-xl sm:text-2xl font-black tracking-tighter text-white">
                   Green India
                 </span>
-                <span className="text-[10px] font-bold text-[#a7c957] tracking-[0.2em] uppercase">
+                <span className="text-[9px] sm:text-[10px] font-bold text-[#a7c957] tracking-[0.2em] uppercase">
                   Pest Control
                 </span>
               </div>
             </Link>
-            <p className="text-gray-400 font-medium leading-relaxed font-bold">
+            <p className="text-gray-400 font-medium leading-relaxed font-bold text-sm sm:text-base">
               Andhra Pradesh's most trusted pest control partner. ISO certified, eco-friendly, and 100% effective.
             </p>
             {/* Google Rating Badge — matches Hero style */}
-            <div className="inline-flex items-center gap-4 px-6 py-4 rounded-3xl bg-white/10 backdrop-blur-xl text-white shadow-2xl border border-white/20">
+            <div className="inline-flex flex-col sm:flex-row items-center gap-4 px-5 py-4 sm:px-6 sm:py-4 rounded-2xl sm:rounded-3xl bg-white/10 backdrop-blur-xl text-white shadow-2xl border border-white/20 w-full sm:w-auto">
               <div className="flex items-center gap-2">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" className="h-6 w-6" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" className="h-5 w-5 sm:h-6 sm:w-6" />
                 <div className="flex -space-x-1">
-                  {[1, 2, 3, 4, 5].map(i => <Star key={i} size={18} className="text-yellow-400 fill-yellow-400" />)}
+                  {[1, 2, 3, 4, 5].map(i => <Star key={i} size={16} className="text-yellow-400 fill-yellow-400 sm:size-18" />)}
                 </div>
               </div>
-              <div className="h-6 w-[1px] bg-white/20"></div>
-              <span className="text-sm font-black tracking-tight uppercase">5.0★ Google Rating | 415+ Reviews</span>
+              <div className="hidden sm:block h-6 w-[1px] bg-white/20"></div>
+              <span className="text-[11px] sm:text-sm font-black tracking-tight uppercase text-center">5.0★ Google Rating | 415+ Reviews</span>
             </div>
           </div>
 
